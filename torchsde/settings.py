@@ -15,7 +15,9 @@
 
 class ContainerMeta(type):
     def all(cls):
-        return sorted(getattr(cls, x) for x in dir(cls) if not x.startswith('__'))
+        # return sorted(getattr(cls, x) for x in dir(cls) if not x.startswith('__'))
+        attrs = (getattr(cls, x) for x in dir(cls) if not x.startswith('__'))
+        return sorted(x for x in attrs if isinstance(x, str))
 
     def __str__(cls):
         return str(cls.all())
